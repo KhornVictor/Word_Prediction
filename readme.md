@@ -18,6 +18,8 @@ This project develops a word prediction system that analyzes text corpora and us
 - **Visualization Tools**: Word frequency analysis and model performance visualization
 - **Configurable Parameters**: Centralized configuration for easy tuning
 
+<img src="./ui/ui.png" alt="ui">
+
 ## 📁 Project Structure
 
 ```
