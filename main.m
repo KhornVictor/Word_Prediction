@@ -28,12 +28,12 @@ fprintf('Vocabulary size: %d\n', numel(vocab));
 fprintf('Total tokens: %d\n', numel(tokens));
 
 % Plot top words
-topN = min(cfg.topWords, numel(freqWords));
-figure('Name', 'Top Words');
-bar(categorical(freqWords(1:topN)), freqCounts(1:topN));
-title('Top Words');
-xlabel('Words');
-ylabel('Frequency');
+% topN = min(cfg.topWords, numel(freqWords));
+% figure('Name', 'Top Words');
+% bar(categorical(freqWords(1:topN)), freqCounts(1:topN));
+% title('Top Words');
+% xlabel('Words');
+% ylabel('Frequency');
 
 % Split dataset
 [trainTokens, testTokens] = splitDataset(tokens, cfg.splitRatio);
@@ -51,14 +51,14 @@ fprintf('Vector accuracy: %.4f\n', results.vectorAccuracy);
 fprintf('Perplexity: %.4f\n', results.perplexity);
 
 % Example prediction
-example = "I";
-exampleTokens = tokenizeText(cleanText(example));
-prevWord = exampleTokens(end);
-[nextBigram, scoreB] = predictNextWordBigram(prevWord, bigramModel, cfg.smoothingAlpha);
-[nextVector, scoreV] = predictNextWordVector(prevWord, coMat, vocab);
-fprintf('Input: "%s"\n', example);
-fprintf('Bigram prediction: %s (%.4f)\n', nextBigram, scoreB);
-fprintf('Vector prediction: %s (%.4f)\n', nextVector, scoreV);
+% example = "I";
+% exampleTokens = tokenizeText(cleanText(example));
+% prevWord = exampleTokens(end);
+% [nextBigram, scoreB] = predictNextWordBigram(prevWord, bigramModel, cfg.smoothingAlpha);
+% [nextVector, scoreV] = predictNextWordVector(prevWord, coMat, vocab);
+% fprintf('Input: "%s"\n', example);
+% fprintf('Bigram prediction: %s (%.4f)\n', nextBigram, scoreB);
+% fprintf('Vector prediction: %s (%.4f)\n', nextVector, scoreV);
 
 % Save processed data
 save(cfg.processedPath, 'tokens', 'vocab', 'bigramModel', 'coMat', 'results');

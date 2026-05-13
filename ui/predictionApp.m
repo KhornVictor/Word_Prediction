@@ -184,18 +184,8 @@ classdef predictionApp < matlab.ui.componentcontainer.ComponentContainer
             comp.Model.vocab = data.vocab;
             comp.Model.bigramModel = data.bigramModel;
             comp.Model.coMat = data.coMat;
-
-            if isfield(data, 'results')
-                comp.renderAccuracy(data.results);
-            end
-        end
-
-        function renderAccuracy(comp, results)
-            cla(comp.UIAxes);
-            models = {'Bigram', 'Vector'};
-            values = [results.bigramAccuracy, results.vectorAccuracy];
-            bar(comp.UIAxes, categorical(models), values);
-            ylim(comp.UIAxes, [0 1]);
+            comp.Model.tokens = strings(0, 1);
+            comp.renderPredictionChart(strings(0, 1), []);
         end
 
         function predictAndRender(comp, inputOverride)
@@ -223,10 +213,13 @@ classdef predictionApp < matlab.ui.componentcontainer.ComponentContainer
 
             comp.setSuggestionButtons(choices);
             if ~isempty(scores)
+                scores = comp.normalizeScores(scores);
                 comp.Probability87Label.Text = sprintf('Probability: %d%%', round(100 * scores(1)));
             else
                 comp.Probability87Label.Text = 'Probability: 0%';
             end
+
+            comp.renderPredictionChart(choices, scores);
         end
 
         function [choices, scores] = topNBigram(comp, prevWord, n)
@@ -314,6 +307,44 @@ classdef predictionApp < matlab.ui.componentcontainer.ComponentContainer
             current = string(comp.EditField.Value);
             comp.EditField.Value = strtrim(current + " " + word);
             comp.predictAndRender();
+        end
+
+        function scores = normalizeScores(comp, scores)
+            scores = scores(:)';
+            if isempty(scores)
+                return;
+            end
+            if any(scores < 0)
+                minVal = min(scores);
+                maxVal = max(scores);
+                if maxVal == minVal
+                    scores = ones(size(scores));
+                else
+                    scores = (scores - minVal) / (maxVal - minVal);
+                end
+            end
+            total = sum(scores);
+            if total > 0
+                scores = scores / total;
+            else
+                scores = zeros(size(scores));
+            end
+        end
+
+        function renderPredictionChart(comp, choices, scores)
+            cla(comp.UIAxes);
+            comp.AccuracyVisualizationLabel.Text = 'Prediction Percentages';
+            title(comp.UIAxes, 'Prediction Percentages');
+            xlabel(comp.UIAxes, 'Words');
+            ylabel(comp.UIAxes, 'Percent');
+            ylim(comp.UIAxes, [0 100]);
+
+            if isempty(choices) || isempty(scores)
+                return;
+            end
+
+            percents = 100 * scores;
+            bar(comp.UIAxes, categorical(choices), percents);
         end
     end
 end
