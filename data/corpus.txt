@@ -1,0 +1,8 @@
+This is a small example corpus for next word prediction.
+I love natural language processing and I love learning about words.
+The weather is good today and the sky is blue.
+Students learn from books and students learn from practice.
+Machine learning models can predict the next word in a sentence.
+I love to read and I love to write.
+The project uses tokenization and bigram models.
+Word vectors can capture word meaning in context.
