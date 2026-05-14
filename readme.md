@@ -24,51 +24,51 @@ This project develops a word prediction system that analyzes text corpora and us
 
 ```
 Word_Prediction/
-├── config.m                          # Central configuration file
-├── main.m                            # Main pipeline execution
-├── readme.md                         # This file
+├── config.m                         # Central configuration file
+├── main.m                           # Main pipeline execution
+├── readme.md                        # This file
 │
-├── data/                             # Data directory
+├── data/                            # Data directory
 │   ├── corpus.txt                   # Input text corpus
 │   └── processed_data.mat           # Preprocessed data cache
 │
-├── preprocessing/                    # Text preprocessing module
+├── preprocessing/                   # Text preprocessing module
 │   ├── loadText.m                   # Load text from file
 │   ├── cleanText.m                  # Text cleaning (lowercase, punctuation)
 │   ├── tokenizeText.m               # Word tokenization
 │   ├── buildVocabulary.m            # Create vocabulary from tokens
 │   └── wordFrequency.m              # Calculate word frequencies
 │
-├── ngram/                            # N-gram model module
+├── ngram/                           # N-gram model module
 │   ├── buildBigramModel.m           # Build bigram count matrix
 │   ├── calculateProbabilities.m     # Compute bigram probabilities
 │   ├── predictNextWordBigram.m      # Predict using bigram model
 │   └── smoothing.m                  # Laplace smoothing implementation
 │
-├── vector/                           # Vector model module
-│   ├── buildCoOccurrenceMatrix.m   # Build co-occurrence matrix
+├── vector/                          # Vector model module
+│   ├── buildCoOccurrenceMatrix.m    # Build co-occurrence matrix
 │   ├── oneHotEncoding.m             # One-hot encoding for words
 │   ├── cosineSimilarity.m           # Cosine similarity computation
 │   └── predictNextWordVector.m      # Predict using vector model
 │
-├── evaluation/                       # Model evaluation module
+├── evaluation/                      # Model evaluation module
 │   ├── splitDataset.m               # Train/test split
 │   ├── calculateAccuracy.m          # Accuracy metric
 │   ├── calculatePerplexity.m        # Perplexity metric
 │   └── compareModels.m              # Compare model performance
 │
-├── ui/                               # User interface
+├── ui/                              # User interface
 │   └── predictionApp.m              # Interactive prediction application
 │
-├── visualization/                    # Visualization tools
+├── visualization/                   # Visualization tools
 │   ├── plotWordFrequency.m          # Plot word frequency distribution
 │   └── plotVocabularyStats.m        # Vocabulary statistics visualization
 │
-├── models/                           # Saved model files
+├── models/                          # Saved model files
 │   ├── bigramModel.mat              # Serialized bigram model
 │   └── vectorModel.mat              # Serialized vector model
 │
-└── docs/                             # Documentation directory
+└── docs/                            # Documentation directory
 ```
 
 ## 🚀 Getting Started
